@@ -26,7 +26,7 @@ CREATE TABLE alumni (
 ) ENGINE=InnoDB;
 
 -- -----------------------------------------------------
--- Table: jobs (each alumnus may have multiple, one is "current")
+-- Table: jobs
 -- -----------------------------------------------------
 CREATE TABLE jobs (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -35,101 +35,104 @@ CREATE TABLE jobs (
     company     VARCHAR(150) NOT NULL,
     city        VARCHAR(100) NOT NULL,
     country     VARCHAR(80)  NOT NULL,
-    latitude    DECIMAL(10, 7) NOT NULL,
-    longitude   DECIMAL(10, 7) NOT NULL,
+    latitude    DECIMAL(10,7) NOT NULL,
+    longitude   DECIMAL(10,7) NOT NULL,
     start_date  DATE         NOT NULL,
     end_date    DATE         NULL,
     is_current  TINYINT(1)   NOT NULL DEFAULT 0,
-    created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (alumni_id) REFERENCES alumni(id) ON DELETE CASCADE,
     INDEX idx_alumni (alumni_id),
     INDEX idx_current (is_current)
 ) ENGINE=InnoDB;
 
 -- =====================================================
--- SEED DATA: 14 realistic alumni
--- All passwords below are bcrypt hashes of "password123"
--- (so you can log in with any email + password123 for testing)
+-- Greece Euro 2004 Champions — 15 players as alumni
+-- password hash = "password123"
 -- =====================================================
-
--- The hash $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
--- corresponds to the plaintext "password123"
 INSERT INTO alumni (first_name, last_name, email, password_hash, enrollment_year, graduation_year, country) VALUES
-('Maria',      'Papadopoulou',  'maria.papadopoulou@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2014, 2018, 'Greece'),
-('Nikolaos',   'Georgiou',      'nikolaos.georgiou@example.com',   '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2013, 2017, 'Germany'),
-('Eleni',      'Konstantinou',  'eleni.konstantinou@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2015, 2019, 'Netherlands'),
-('Dimitris',   'Antoniou',      'dimitris.antoniou@example.com',   '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2012, 2016, 'United Kingdom'),
-('Sofia',      'Vasileiou',     'sofia.vasileiou@example.com',     '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2016, 2020, 'Greece'),
-('Konstantinos','Iordanidis',   'konstantinos.iordanidis@example.com','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2011, 2015, 'United States'),
-('Anna',       'Markou',        'anna.markou@example.com',         '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2017, 2021, 'Greece'),
-('Giorgos',    'Stefanidis',    'giorgos.stefanidis@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2014, 2018, 'Switzerland'),
-('Christina',  'Lambrou',       'christina.lambrou@example.com',   '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2013, 2017, 'France'),
-('Petros',     'Tsoukalas',     'petros.tsoukalas@example.com',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2015, 2019, 'Cyprus'),
-('Katerina',   'Dimitriou',     'katerina.dimitriou@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2018, 2022, 'Greece'),
-('Vasilis',    'Karagiannis',   'vasilis.karagiannis@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2010, 2014, 'Sweden'),
-('Ioanna',     'Pappa',         'ioanna.pappa@example.com',        '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2016, 2020, 'Belgium'),
-('Andreas',    'Mitropoulos',   'andreas.mitropoulos@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2012, 2016, 'Germany'),
-('Despoina',   'Athanasiou',    'despoina.athanasiou@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2017, 2021, 'Ireland');
+('Antonios',    'Nikopolidis',      'antonios.nikopolidis@example.com',     '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1998, 2002, 'Greece'),
+('Giourkas',    'Seitaridis',       'giourkas.seitaridis@example.com',      '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 2000, 2004, 'Portugal'),
+('Stylianos',   'Venetidis',        'stylianos.venetidis@example.com',      '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1999, 2003, 'Greece'),
+('Nikos',       'Dabizas',          'nikos.dabizas@example.com',            '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1997, 2001, 'United Kingdom'),
+('Traianos',    'Dellas',           'traianos.dellas@example.com',          '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1999, 2003, 'Italy'),
+('Angelos',     'Basinas',          'angelos.basinas@example.com',          '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1999, 2003, 'Greece'),
+('Theodoros',   'Zagorakis',        'theodoros.zagorakis@example.com',      '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1996, 2000, 'Bulgaria'),
+('Stelios',     'Giannakopoulos',   'stelios.giannakopoulos@example.com',   '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1998, 2002, 'United Kingdom'),
+('Angelos',     'Charisteas',       'angelos.charisteas@example.com',       '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 2002, 2006, 'Germany'),
+('Giorgos',     'Karagounis',       'giorgos.karagounis@example.com',       '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1997, 2001, 'Italy'),
+('Demis',       'Nikolaidis',       'demis.nikolaidis@example.com',         '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1997, 2001, 'Spain'),
+('Takis',       'Fyssas',           'takis.fyssas@example.com',             '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1997, 2001, 'Portugal'),
+('Zisis',       'Vryzas',           'zisis.vryzas@example.com',             '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1998, 2002, 'Italy'),
+('Pantelis',    'Kafes',            'pantelis.kafes@example.com',           '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 2001, 2005, 'Greece'),
+('Kostas',      'Chalkias',         'kostas.chalkias@example.com',          '$2b$12$liGzTINxmzPSL1CfU4a6u.BZ2RtXiXEuQ13VojU0aS2i.X3Ks/7pe', 1998, 2002, 'Greece');
 
--- -----------------------------------------------------
--- Jobs: at least one CURRENT job per alumnus, some have past jobs too
--- Coordinates correspond to real city centers (approximate)
--- -----------------------------------------------------
+-- =====================================================
+-- Jobs — varied roles, cities, companies
+-- =====================================================
 INSERT INTO jobs (alumni_id, title, company, city, country, latitude, longitude, start_date, end_date, is_current) VALUES
--- 1: Maria Papadopoulou - Athens, Greece
-(1, 'Senior Software Engineer',     'Beat',                 'Athens',     'Greece',         37.9838000, 23.7275000, '2021-03-01', NULL, 1),
-(1, 'Junior Developer',             'Workable',             'Athens',     'Greece',         37.9838000, 23.7275000, '2018-09-01', '2021-02-28', 0),
 
--- 2: Nikolaos Georgiou - Berlin, Germany
-(2, 'Backend Developer',            'Zalando',              'Berlin',     'Germany',        52.5200000, 13.4050000, '2020-06-01', NULL, 1),
-(2, 'Software Engineer',            'N26',                  'Berlin',     'Germany',        52.5200000, 13.4050000, '2017-10-01', '2020-05-31', 0),
+-- 1: Antonios Nikopolidis - Athens, Greece (Goalkeeper → Sports Tech)
+(1, 'Head of Sports Analytics',     'Panathinaikos FC',     'Athens',       'Greece',         37.9838000, 23.7275000, '2020-03-01', NULL, 1),
+(1, 'Performance Coach',            'Greek Football Fed.',  'Athens',       'Greece',         37.9838000, 23.7275000, '2014-08-01', '2020-02-28', 0),
 
--- 3: Eleni Konstantinou - Amsterdam, Netherlands
-(3, 'Full Stack Developer',         'Booking.com',          'Amsterdam',  'Netherlands',    52.3676000,  4.9041000, '2019-08-15', NULL, 1),
+-- 2: Giourkas Seitaridis - Lisbon, Portugal (Right Back → Security)
+(2, 'Cybersecurity Engineer',       'Altice Portugal',      'Lisbon',       'Portugal',       38.7223000, -9.1393000, '2021-05-01', NULL, 1),
+(2, 'IT Security Analyst',          'NOS Telecom',          'Lisbon',       'Portugal',       38.7223000, -9.1393000, '2017-09-01', '2021-04-30', 0),
 
--- 4: Dimitris Antoniou - London, UK
-(4, 'DevOps Engineer',              'Monzo Bank',           'London',     'United Kingdom', 51.5074000, -0.1278000, '2020-01-10', NULL, 1),
-(4, 'Systems Administrator',        'Revolut',              'London',     'United Kingdom', 51.5074000, -0.1278000, '2016-09-01', '2019-12-31', 0),
+-- 3: Stylianos Venetidis - Thessaloniki, Greece (Defender → Fintech)
+(3, 'Senior Software Engineer',     'Viva Wallet',          'Thessaloniki', 'Greece',         40.6401000, 22.9444000, '2019-06-01', NULL, 1),
+(3, 'Backend Developer',            'Upstream Systems',     'Athens',       'Greece',         37.9838000, 23.7275000, '2015-10-01', '2019-05-31', 0),
 
--- 5: Sofia Vasileiou - Thessaloniki, Greece
-(5, 'Mobile Developer',             'Pfizer Hellas',        'Thessaloniki','Greece',        40.6401000, 22.9444000, '2020-09-01', NULL, 1),
+-- 4: Nikos Dabizas - Leicester, UK (Centre Back → Data)
+(4, 'Data Engineering Manager',     'Next PLC',             'Leicester',    'United Kingdom', 52.6369000, -1.1398000, '2020-02-01', NULL, 1),
+(4, 'Data Analyst',                 'Experian',             'Nottingham',   'United Kingdom', 52.9548000, -1.1581000, '2016-03-01', '2020-01-31', 0),
 
--- 6: Konstantinos Iordanidis - San Francisco, USA
-(6, 'Senior Cloud Architect',       'Salesforce',           'San Francisco','United States',37.7749000,-122.4194000, '2019-04-01', NULL, 1),
-(6, 'Software Engineer',            'Oracle',               'San Francisco','United States',37.7749000,-122.4194000, '2015-08-01', '2019-03-31', 0),
+-- 5: Traianos Dellas - Rome, Italy (Centre Back → Cloud)
+(5, 'Cloud Solutions Architect',    'Engineering Group',    'Rome',         'Italy',          41.9028000, 12.4964000, '2021-01-10', NULL, 1),
+(5, 'DevOps Engineer',              'Accenture Italia',     'Milan',        'Italy',          45.4654000,  9.1859000, '2016-07-01', '2020-12-31', 0),
 
--- 7: Anna Markou - Athens, Greece
-(7, 'Data Scientist',               'Deloitte',             'Athens',     'Greece',         37.9838000, 23.7275000, '2021-07-15', NULL, 1),
+-- 6: Angelos Basinas - Athens, Greece (Midfielder → Product)
+(6, 'Product Manager',              'Skroutz',              'Athens',       'Greece',         37.9838000, 23.7275000, '2020-09-01', NULL, 1),
+(6, 'Business Analyst',             'PwC Greece',           'Athens',       'Greece',         37.9838000, 23.7275000, '2015-01-01', '2020-08-31', 0),
 
--- 8: Giorgos Stefanidis - Zurich, Switzerland
-(8, 'Machine Learning Engineer',    'Google',               'Zurich',     'Switzerland',    47.3769000,  8.5417000, '2020-11-01', NULL, 1),
-(8, 'Research Engineer',            'ETH Zurich',           'Zurich',     'Switzerland',    47.3769000,  8.5417000, '2018-09-01', '2020-10-31', 0),
+-- 7: Theodoros Zagorakis - Sofia, Bulgaria (Captain/Midfielder → Management)
+(7, 'Chief Technology Officer',     'Telelink Business',    'Sofia',        'Bulgaria',       42.6977000, 23.3219000, '2019-11-01', NULL, 1),
+(7, 'VP Engineering',               'Musala Soft',          'Sofia',        'Bulgaria',       42.6977000, 23.3219000, '2014-05-01', '2019-10-31', 0),
 
--- 9: Christina Lambrou - Paris, France
-(9, 'Product Manager',              'Doctolib',             'Paris',      'France',         48.8566000,  2.3522000, '2020-02-01', NULL, 1),
+-- 8: Stelios Giannakopoulos - Manchester, UK (Winger → AI)
+(8, 'Machine Learning Engineer',    'AstraZeneca',          'Manchester',   'United Kingdom', 53.4808000, -2.2426000, '2021-04-01', NULL, 1),
+(8, 'Data Scientist',               'Manchester City FC',   'Manchester',   'United Kingdom', 53.4808000, -2.2426000, '2017-06-01', '2021-03-31', 0),
 
--- 10: Petros Tsoukalas - Limassol, Cyprus
-(10, 'Cybersecurity Analyst',       'Wargaming',            'Limassol',   'Cyprus',         34.7071000, 33.0226000, '2019-09-01', NULL, 1),
+-- 9: Angelos Charisteas - Bremen, Germany (Striker → EV/Automotive)
+(9, 'Software Engineer',            'Mercedes-Benz',        'Stuttgart',    'Germany',        48.7758000,  9.1829000, '2020-08-01', NULL, 1),
+(9, 'Junior Developer',             'Werder Bremen FC',     'Bremen',       'Germany',        53.0793000,  8.8017000, '2015-02-01', '2020-07-31', 0),
 
--- 11: Katerina Dimitriou - Patras, Greece
-(11, 'Frontend Developer',          'Upstream',             'Athens',     'Greece',         37.9838000, 23.7275000, '2022-06-01', NULL, 1),
+-- 10: Giorgos Karagounis - Milan, Italy (Midfielder → Consulting)
+(10, 'Senior Consultant',           'Deloitte Italia',      'Milan',        'Italy',          45.4654000,  9.1859000, '2019-07-01', NULL, 1),
+(10, 'Business Consultant',         'KPMG Italia',          'Rome',         'Italy',          41.9028000, 12.4964000, '2014-09-01', '2019-06-30', 0),
 
--- 12: Vasilis Karagiannis - Stockholm, Sweden
-(12, 'Engineering Manager',         'Spotify',              'Stockholm',  'Sweden',         59.3293000, 18.0686000, '2018-05-01', NULL, 1),
-(12, 'Senior Software Engineer',    'Klarna',               'Stockholm',  'Sweden',         59.3293000, 18.0686000, '2014-10-01', '2018-04-30', 0),
+-- 11: Demis Nikolaidis - Madrid, Spain (Striker → Gaming)
+(11, 'Game Developer',              'Scopely',              'Madrid',       'Spain',          40.4168000, -3.7038000, '2021-03-01', NULL, 1),
+(11, 'Software Developer',          'Gameloft Iberia',      'Madrid',       'Spain',          40.4168000, -3.7038000, '2016-11-01', '2021-02-28', 0),
 
--- 13: Ioanna Pappa - Brussels, Belgium
-(13, 'API Developer',               'European Commission',  'Brussels',   'Belgium',        50.8503000,  4.3517000, '2020-10-01', NULL, 1),
+-- 12: Takis Fyssas - Lisbon, Portugal (Left Back → Fintech)
+(12, 'Fullstack Developer',         'Revolut Portugal',     'Lisbon',       'Portugal',       38.7223000, -9.1393000, '2020-06-01', NULL, 1),
+(12, 'Frontend Developer',          'Farfetch',             'Porto',        'Portugal',       41.1579000, -8.6291000, '2015-08-01', '2020-05-31', 0),
 
--- 14: Andreas Mitropoulos - Munich, Germany
-(14, 'Tech Lead',                   'BMW Group',            'Munich',     'Germany',        48.1351000, 11.5820000, '2019-03-01', NULL, 1),
-(14, 'Software Architect',          'Siemens',              'Munich',     'Germany',        48.1351000, 11.5820000, '2016-09-01', '2019-02-28', 0),
+-- 13: Zisis Vryzas - Turin, Italy (Striker → Automotive)
+(13, 'Systems Engineer',            'Stellantis',           'Turin',        'Italy',          45.0703000,  7.6869000, '2020-04-01', NULL, 1),
+(13, 'Embedded Engineer',           'Fiat Chrysler',        'Turin',        'Italy',          45.0703000,  7.6869000, '2015-06-01', '2020-03-31', 0),
 
--- 15: Despoina Athanasiou - Dublin, Ireland
-(15, 'Site Reliability Engineer',   'Stripe',               'Dublin',     'Ireland',        53.3498000, -6.2603000, '2021-08-01', NULL, 1);
+-- 14: Pantelis Kafes - Athens, Greece (Midfielder → Startup)
+(14, 'Co-founder & CTO',            'Blueground',           'Athens',       'Greece',         37.9838000, 23.7275000, '2021-09-01', NULL, 1),
+(14, 'Lead Developer',              'Workable',             'Athens',       'Greece',         37.9838000, 23.7275000, '2016-03-01', '2021-08-31', 0),
+
+-- 15: Kostas Chalkias - Athens, Greece (Goalkeeper → Cybersecurity)
+(15, 'Information Security Manager','Eurobank',             'Athens',       'Greece',         37.9838000, 23.7275000, '2019-10-01', NULL, 1),
+(15, 'Security Analyst',            'Alpha Bank',           'Athens',       'Greece',         37.9838000, 23.7275000, '2014-11-01', '2019-09-30', 0);
 
 -- =====================================================
 -- Quick sanity checks:
--- SELECT COUNT(*) FROM alumni;     -- expect 15
--- SELECT COUNT(*) FROM jobs WHERE is_current = 1;  -- expect 15
+-- SELECT COUNT(*) FROM alumni;                          -- expect 15
+-- SELECT COUNT(*) FROM jobs WHERE is_current = 1;      -- expect 15
 -- =====================================================
