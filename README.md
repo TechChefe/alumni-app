@@ -1,4 +1,4 @@
-# UTH Digital Systems — Alumni Map
+#Alumni Map
 
 REST API + Single-Page Web Application
 Assignment 2 of *Advanced Web Applications*, MSc Software Engineering, University of Thessaly.
